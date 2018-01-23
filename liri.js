@@ -1,14 +1,9 @@
 const dotenv = require('dotenv').config();
 
-
-//const request = require('request');
 const keys = require('./keys.js');
 
-
-
-
 const command = process.argv[2];
-const search = process.argv[3];
+var search = process.argv[3];
 
 switch(command) {
   case 'my-tweets': 
@@ -68,5 +63,28 @@ function getSong(){
 }	
 
 //'movie-this' function
+function getMovie(){
+	if(!search){
+		search = "mr nobody"
+	}
+	const request = require('request');{
+		request("http://www.omdbapi.com/?apikey=trilogy&t=" + search + "", function (error, response, body) {
+  			if (error) {
+   			 	throw error
+  			} else {
+   				 const results = JSON.parse(body);
+   				 console.log("Title:" + " " + results.Title);
+   				 console.log("Year:" + " " + results.Year);
+   				 console.log("IMDB Rating:" + " " + results.imdbRating);
+   				 console.log("Rotten Tomatoes:" + " " + results.Ratings[1].Value);
+   				 console.log("Produced in:" + " " + results.Country);
+   				 console.log("Language:" + " " + results.Language);
+   				 console.log("Plot:" + " " + results.Plot);
+   				 console.log("Actors:" + " " + results.Actors);
+
+  		}
+});
+	}
+}
 
 //'do-what-it-says' function
