@@ -24,4 +24,4 @@ This will return the following: Movie Title, Year Made, IMDB Rating, Rotten Toma
 
 do-what-it-says
 
-This will read the information for the random.txt file. it will use this information to automatically run one of th ecommands listed above
+This will read the information from the random.txt file. It will use this information to automatically run one of the commands listed above
