@@ -48,7 +48,7 @@ function getSong(){
 	const Spotify = require('node-spotify-api');
 	const spotify = new Spotify(keys.spotify);
   if(!search){
-    search = "the sign";
+    search = "hail to the king";
   }
 	spotify.search({ type: "track", query: search}, function(err, data) {
   		if (err) {
