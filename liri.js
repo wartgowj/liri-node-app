@@ -37,16 +37,20 @@ function getTweets(){
       	console.log("-------------------------------------------------");
  	 }
   	} else {
-      throw error
-  }
-});
+      console.log(error);
+      return;
+  	}
+	});
 }
 
 //'spotify-this-song' function
 function getSong(){
 	const Spotify = require('node-spotify-api');
 	const spotify = new Spotify(keys.spotify);
-	spotify.search({ type: 'track', query: search, limit:5 }, function(err, data) {
+  if(!search){
+    search = "the sign";
+  }
+	spotify.search({ type: "track", query: search}, function(err, data) {
   		if (err) {
     		return console.log('Error occurred: ' + err);
   }
@@ -82,9 +86,34 @@ function getMovie(){
    				 console.log("Plot:" + " " + results.Plot);
    				 console.log("Actors:" + " " + results.Actors);
 
-  		}
-});
+  			}
+		});
 	}
 }
 
 //'do-what-it-says' function
+function doWhatever(){
+  const fs = require('fs');
+  fs.readFile("random.txt", "utf8", function(error, data) {
+
+  if (error) {
+    return console.log(error);
+  }
+  var dataArr = data.split(",");
+
+  switch(dataArr[0]) {
+  case 'spotify-this-song':
+    search = dataArr[1]
+    getSong(search);
+    break;
+  case 'movie-this':
+    search = dataArr[1]
+    getMovie(search);
+    break;
+  default: {
+    console.log('invalid input!!!')
+  }
+}
+
+});
+}
